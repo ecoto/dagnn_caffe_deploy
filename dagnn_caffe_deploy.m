@@ -367,7 +367,7 @@ for idx = 1:numel(net.layers)
         bias = net.layers{idx}.weights{2};
         caffeNet.layers(scale_layer_name).params(2).set_data(bias); % set bias
 
-    case {'dagnn.ReLU', 'dagnn.LRN', 'dagnn.Pooling' , 'dagnn.SoftMax', 'dagnn.Sum', 'dagnn.Concat' }
+    case {'dagnn.ReLU', 'dagnn.LRN', 'dagnn.Pooling' , 'dagnn.SoftMax', 'dagnn.Sum', 'dagnn.Concat', 'dagnn.DropOut' }
       % No weights - nothing to do
     otherwise
       error('Unknown layer type %s', layer_type)
