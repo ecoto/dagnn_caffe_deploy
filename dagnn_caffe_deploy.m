@@ -178,7 +178,7 @@ for idx = 1:numel(net.layers)
         write_stride(fid,net.layers{idx}.block.stride);
         if isfield(net.layers{idx}.block, 'pad') && numel(net.layers{idx}.block.pad) == 4
           % Make sure pad is symmetrical
-          if any(net.layers{idx}.block.pad([1, 3]) ~= net.layers{idx}.block.pad([2, 3]))
+          if any(net.layers{idx}.block.pad([1, 3]) ~= net.layers{idx}.block.pad([2, 4]))
             error('Caffe only supports symmetrical padding');
           end
         end
