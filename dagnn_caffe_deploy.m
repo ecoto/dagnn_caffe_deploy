@@ -229,7 +229,7 @@ for idx = 1:numel(net.layers)
        fprintf(fid,'}\n\n');
        fprintf(fid,'layer {\n');
        % Change layer name
-       scale_layer_name = strrep(net.layers{idx}.name, 'bn', 'scale');
+       scale_layer_name = [net.layers{idx}.name '_scale'];
        fprintf(fid,'  name: "%s"\n', scale_layer_name);
        fprintf(fid, '  type: "Scale"\n');
        fprintf(fid, '  bottom: "%s"\n', net.layers{idx}.name);
@@ -361,7 +361,7 @@ for idx = 1:numel(net.layers)
         caffeNet.layers(layer_name).params(3).set_data(scale_factor); % set scale factor
 
         % Add parameters for extra Scale layer
-        scale_layer_name = strrep(net.layers{idx}.name, 'bn', 'scale');
+        scale_layer_name = [net.layers{idx}.name '_scale'];
         mult = net.layers{idx}.weights{1};
         caffeNet.layers(scale_layer_name).params(1).set_data(mult); % set mult
         bias = net.layers{idx}.weights{2};
@@ -441,7 +441,7 @@ end
                     % in this case, a Scale layer should have been added
                     % rigth after the BatchNorm layer, so make the
                     % Scale layer the bottom of this one
-                    scale_layer_name = strrep(layers{input_search_idx}.name, 'bn', 'scale');
+                    scale_layer_name = [layers{input_search_idx}.name '_scale'];
                     fprintf(fid, '  bottom: "%s"\n', scale_layer_name);
                 else
                     fprintf(fid, '  bottom: "%s"\n', layers{input_search_idx}.name);
